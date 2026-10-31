@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghost Data Audit | Northstar Shop</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">G</div><div><strong>Ghost Data</strong><span>DELETION AUDIT</span></div></div>
+      <div class="side-label">WORKSPACE</div>
+      <a class="nav-link active" href="#overview"><span>▦</span> Overview</a>
+      <a class="nav-link" href="#cases"><span>⌕</span> Case explorer</a>
+      <a class="nav-link" href="#signals"><span>◈</span> Audit signals</a>
+      <div class="sidebar-bottom"><div class="status-dot"></div><div><b>Local workspace</b><small>Data stays on this computer</small></div></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><div><div class="eyebrow">NORTHSTAR SHOP / TRUST & SAFETY</div><h1>Deletion audit dashboard</h1><p>Review deletion outcomes, evidence signals and follow-up actions.</p></div><a class="download-btn" href="/download/output.csv">↓ <span>Download output.csv</span></a></header>
+      <div id="errorBanner" class="error-banner hidden"></div>
+      <section id="overview" class="metric-grid">
+        <article class="metric-card total-card"><div class="metric-top"><span>Total requests</span><span class="metric-icon">▤</span></div><div class="metric-value" id="totalRequests">—</div><div class="metric-foot">Rows in generated output</div></article>
+        <article class="metric-card"><div class="metric-top"><span>Complete</span><span class="pill green">Verified</span></div><div class="metric-value" id="completeCount">—</div><div class="metric-foot"><span class="tiny-dot green-bg"></span> Marked complete by current solution</div></article>
+        <article class="metric-card"><div class="metric-top"><span>Incomplete</span><span class="pill amber">Action needed</span></div><div class="metric-value" id="incompleteCount">—</div><div class="metric-foot"><span class="tiny-dot amber-bg"></span> Findings or remediation steps present</div></article>
+        <article class="metric-card"><div class="metric-top"><span>Not applicable</span><span class="pill slate">Out of scope</span></div><div class="metric-value" id="naCount">—</div><div class="metric-foot">No deletion action required</div></article>
+      </section>
+      <section id="signals" class="content-grid">
+        <article class="panel status-panel"><div class="panel-heading"><div><h2>Outcome distribution</h2><p>Breakdown of generated classifications</p></div><span class="subtle-tag">ALL CASES</span></div><div id="statusChart" class="bar-chart"></div><div class="chart-note">Counts are read from the current <code>output.csv</code>.</div></article>
+        <article class="panel signal-panel"><div class="panel-heading"><div><h2>Evidence & action signals</h2><p>Steps represented in the output</p></div><span class="signal-symbol">◈</span></div><div class="signal-list" id="signalList"></div><div class="chart-note">Signals describe generated steps, not proof that remediation has actually been executed.</div></article>
+      </section>
+      <section class="panel cases-panel" id="cases">
+        <div class="panel-heading cases-heading"><div><h2>Case explorer</h2><p>Search requests and inspect their ordered audit steps.</p></div><div class="case-count" id="caseCount">Loading cases…</div></div>
+        <div class="filters"><div class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search case ID, email or reported status…" autocomplete="off"></div><select id="statusFilter" aria-label="Filter by status"><option value="ALL">All statuses</option><option value="COMPLETE">Complete</option><option value="INCOMPLETE">Incomplete</option><option value="NOT_APPLICABLE">Not applicable</option></select></div>
+        <div class="table-wrap"><table><thead><tr><th>CASE ID</th><th>REQUESTED AT</th><th>REPORTED</th><th>RESULT</th><th>STEPS</th><th></th></tr></thead><tbody id="casesBody"><tr><td colspan="6" class="empty-cell">Loading…</td></tr></tbody></table></div>
+        <div class="table-footer"><span id="tableSummary">—</span><span>Showing up to 500 matching cases</span></div>
+      </section>
+      <footer>Ghost Data Still Exists · Local review interface <span>Not a substitute for verifying the canonical challenge score.</span></footer>
+    </main>
+  </div>
+  <div id="detailOverlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><div class="detail-drawer"><div class="drawer-top"><div><div class="eyebrow">AUDIT CASE DETAILS</div><h2 id="detailTitle">Case</h2></div><button id="closeDetail" class="close-btn" aria-label="Close details">×</button></div><div id="detailContent"></div></div></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
